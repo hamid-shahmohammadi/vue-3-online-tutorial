@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+<body>
+
+    <div id="app">
+        <section v-show="inprogress.length">
+            <h2 class="font-bold mb-2">In Progress</h2>
+            <ul>
+                <li v-for="task in inprogress" :key="task.id">
+                    {{ task.name }} 
+                    <input type="checkbox" v-model="task.complete" />
+
+                </li>               
+            </ul>
+        </section>
+        <section v-if="taskComplete.length">
+            <h2 class="font-bold mb-2">Complete</h2>
+            <ul>
+                <li v-for="task in taskComplete" :key="task.id">
+                    {{ task.name }} 
+                    <input type="checkbox" v-model="task.complete" />
+                </li>               
+            </ul>
+        </section>           
+    </div>    
+    
+    <script>
+        const {createApp} = Vue;
+
+        createApp({
+            data(){
+                return {
+                   tasks:[
+                        {name:'task1',complete:false,id:1},
+                        {name:'task2',complete:false,id:2},
+                        {name:'task3',complete:true,id:3},
+                   ]
+                }
+            },
+            mounted(){
+                
+            },
+            methods:{
+                toggle(){
+                    
+                },
+                addUser(){
+
+                }
+            },
+            computed:{
+                taskComplete(){
+                    return this.tasks.filter(a=>a.complete);
+                },
+                inprogress(){
+                    return this.tasks.filter(a=>!a.complete);
+                }
+            }
+        }).mount("#app");
+
+
+
+    </script>
+</body>
+</html>
